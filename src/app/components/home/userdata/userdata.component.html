@@ -1,0 +1,182 @@
+<div class="row" style="margin: 10px;">
+    <div class="col d-flex justify-content-center">
+        <table class="table table-light" style="color: black;" *ngIf="users.length > 0 && (admin||observer)">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Pais</th>
+                    <th scope="col" *ngIf="admin">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <th>
+                        {{user.id}}
+                    </th>
+                    <th>
+                        {{ user.name }}
+                    </th>
+                    <th>
+                        {{user.description}}
+                    </th>
+
+                    <th>
+                        {{user.country}}
+                    </th>
+
+                    <th scope="col" *ngIf="admin" style="width: 20%;">
+                        <!-- MODAL -->
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            attr.data-target="#modal{{user.id}}" *ngIf="admin">
+                            Actualizar información
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modal'+user.id" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" [id]="'modal'+user.id">Actualizar información del
+                                            usuario {{user.name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- INPUT -->
+                                        <div class="input-group mb-3">
+
+                                            <input type="text" class="form-control" placeholder="Descripción"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                [(ngModel)]="desc">
+
+                                            <input type="text" class="form-control" placeholder="País"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                [(ngModel)]="pais">
+
+                                            <small style="color: red;" *ngIf="error">*Ha ocurrido un error</small>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary d-flex align-items-center"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            (click)="submit(user.id)">
+                                            
+                                            Actualizar
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MODAL -->
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- USER -->
+<div class="row" style="margin: 10px;">
+    <div class="col d-flex justify-content-center">
+        <table class="table table-light" style="color: black;" *ngIf="usuario">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripción</th>
+                    <th scope="col">Pais</th>
+                    <th scope="col">Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>
+                        {{user.id}}
+                    </th>
+                    <th>
+                        {{ user.name }}
+                    </th>
+                    <th>
+                        {{user.description}}
+                    </th>
+
+                    <th>
+                        {{user.country}}
+                    </th>
+
+                    <th scope="col">
+                        <!-- MODAL -->
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                            attr.data-target="#modal{{user.id}}">
+                            Actualizar información
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modal'+user.id" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" [id]="'modal'+user.id">Actualizar información del
+                                            usuario {{user.name}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <!-- INPUT -->
+                                        <div class="input-group mb-3">
+
+                                            <input type="text" class="form-control" placeholder="Descripción"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                [(ngModel)]="desc">
+
+                                            <input type="text" class="form-control" placeholder="País"
+                                                aria-label="Username" aria-describedby="basic-addon1"
+                                                [(ngModel)]="pais">
+
+                                            <small style="color: red;" *ngIf="error">*Ha ocurrido un error</small>
+
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary d-flex align-items-center"
+                                            data-dismiss="modal">Cerrar</button>
+                                        <button type="button" class="btn btn-success" data-dismiss="modal"
+                                            (click)="submitUser(user.id)">
+                                            
+                                            Actualizar
+                                        </button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- MODAL -->
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<h2 *ngIf="nullUser">
+    *No tienes un Rol asignado.
+</h2>

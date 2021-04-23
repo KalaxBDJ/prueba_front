@@ -1,5 +1,5 @@
+<app-login (onUsuario)="onUsuario($event)"  *ngIf="!validated"></app-login>
 
-<div>
+<app-home *ngIf="validated" [usuario]="usuario"></app-home>
 
-  <router-outlet></router-outlet>
-</div>
+<router-outlet></router-outlet>
